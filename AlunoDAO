@@ -1,0 +1,61 @@
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AlunoDAO {
+    private Connection conn;
+
+    public AlunoDAO() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:derby:escola;create=true");
+        criarTabela();
+    }
+
+    private void criarTabela() throws SQLException {
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate("CREATE TABLE aluno (" +
+                    "matricula VARCHAR(20) PRIMARY KEY, " +
+                    "nome VARCHAR(100), " +
+                    "entrada INT)");
+        } catch (SQLException e) {
+            // ignora se já existir
+        }
+    }
+
+    public void inserir(Aluno aluno) throws SQLException {
+        String sql = "INSERT INTO aluno (matricula, nome, entrada) VALUES (?, ?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, aluno.getMatricula());
+            pstmt.setString(2, aluno.getNome());
+            pstmt.setInt(3, aluno.getEntrada());
+            pstmt.executeUpdate();
+        }
+    }
+
+    public List<Aluno> listarTodos() throws SQLException {
+        List<Aluno> alunos = new ArrayList<>();
+        String sql = "SELECT * FROM aluno";
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                alunos.add(new Aluno(
+                        rs.getString("matricula"),
+                        rs.getString("nome"),
+                        rs.getInt("entrada")
+                ));
+            }
+        }
+        return alunos;
+    }
+
+    public void excluir(String matricula) throws SQLException {
+        String sql = "DELETE FROM aluno WHERE matricula = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, matricula);
+            pstmt.executeUpdate();
+        }
+    }
+
+    public void fechar() throws SQLException {
+        if (conn != null) conn.close();
+    }
+}
