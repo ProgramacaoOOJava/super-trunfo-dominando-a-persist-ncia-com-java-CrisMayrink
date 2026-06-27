@@ -1,0 +1,31 @@
+import jakarta.persistence.*;
+
+@Entity
+@NamedQueries({
+    @NamedQuery(name="Aluno.findAll", query="SELECT a FROM Aluno a ORDER BY a.nome"),
+    @NamedQuery(name="Aluno.findByMatricula", query="SELECT a FROM Aluno a WHERE a.matricula = :matricula")
+})
+public class Aluno {
+    @Id
+    private String matricula;
+    private String nome;
+    private int entrada;
+
+    public Aluno() {}
+    public Aluno(String matricula) { this.matricula = matricula; }
+
+    // getters e setters...
+
+    public boolean batalhar(Aluno oponente, String atributo) {
+        switch (atributo.toLowerCase()) {
+            case "entrada": return this.entrada > oponente.entrada;
+            default: return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        String borda = (entrada == 2030) ? "LENDÁRIA " : " Carta";
+        return borda + "\nMatrícula: " + matricula + "\nNome: " + nome + "\nEntrada: " + entrada;
+    }
+}
