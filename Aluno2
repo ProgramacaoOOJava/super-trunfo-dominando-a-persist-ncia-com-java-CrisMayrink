@@ -1,0 +1,29 @@
+public class Aluno {
+    private final String matricula;
+    private final String nome;
+    private final int entrada;
+
+    public Aluno(String matricula, String nome, int entrada) {
+        this.matricula = matricula;
+        this.nome = nome;
+        this.entrada = entrada;
+    }
+
+    public String getMatricula() { return matricula; }
+    public String getNome() { return nome; }
+    public int getEntrada() { return entrada; }
+
+    // Determina raridade pela primeira letra da matrícula
+    public String getRaridade() {
+        char primeiraLetra = matricula.toUpperCase().charAt(0);
+        return (primeiraLetra >= 'A' && primeiraLetra <= 'M') ? "Comum" : "Rara";
+    }
+
+    // Exibe carta formatada
+    public void exibirCarta() {
+        System.out.println("Carta: " + nome);
+        System.out.println("Força: " + entrada);
+        System.out.println("Raridade: " + getRaridade());
+        System.out.println("---------------------------");
+    }
+}
