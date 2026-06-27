@@ -1,0 +1,34 @@
+import java.util.*;
+
+public class TorneioManager {
+    private List<Aluno> baralho;
+    private Random random = new Random();
+
+    public TorneioManager(List<Aluno> baralho) {
+        this.baralho = baralho;
+    }
+
+    public void iniciarTorneio() {
+        if (baralho.size() < 2) {
+            System.out.println(" É necessário pelo menos 2 cartas.");
+            return;
+        }
+
+        Aluno carta1 = baralho.get(random.nextInt(baralho.size()));
+        Aluno carta2 = baralho.get(random.nextInt(baralho.size()));
+
+        System.out.println(" Batalha entre:");
+        System.out.println(carta1);
+        System.out.println(carta2);
+
+        boolean vitoria = carta1.batalhar(carta2, "entrada");
+        Aluno vencedor = vitoria ? carta1 : carta2;
+
+        System.out.println(" Vencedor: " + vencedor.getNome());
+
+        // recompensa lendária
+        CartaLendaria lendaria = new CartaLendaria("L" + random.nextInt(9999), "Carta Lendária");
+        baralho.add(lendaria);
+        System.out.println(" Recompensa: " + lendaria);
+    }
+}
