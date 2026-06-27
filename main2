@@ -7,11 +7,11 @@ public class Main {
             AlunoDAO dao = new AlunoDAO();
 
             // Inserir 5 alunos
-            dao.inserir(new Aluno("A001", "Alice", 2022));
-            dao.inserir(new Aluno("N002", "Nicolas", 2024));
+            dao.inserir(new Aluno("A001", "João", 2022));
+            dao.inserir(new Aluno("N002", "Maria", 2024));
             dao.inserir(new Aluno("M003", "Mariana", 2021));
-            dao.inserir(new Aluno("Z004", "Zeca", 2025));
-            dao.inserir(new Aluno("B005", "Bruno", 2023));
+            dao.inserir(new Aluno("Z004", "Joaquim", 2025));
+            dao.inserir(new Aluno("B005", "Bia", 2023));
 
             // Consultar e exibir cartas
             List<Aluno> alunos = dao.listarTodos();
@@ -20,12 +20,12 @@ public class Main {
                 a.exibirCarta();
             }
 
-            // Exemplo de batalha: Zeca vs Alice
-            Aluno zeca = alunos.stream().filter(a -> a.getNome().equals("Zeca")).findFirst().get();
-            Aluno alice = alunos.stream().filter(a -> a.getNome().equals("Alice")).findFirst().get();
+            // Exemplo de batalha: Joaquim vs João
+            Aluno joaquim = alunos.stream().filter(a -> a.getNome().equals("Joaquim")).findFirst().get();
+            Aluno joao = alunos.stream().filter(a -> a.getNome().equals("João")).findFirst().get();
 
-            System.out.println(" Batalha: " + zeca.getNome() + " vs " + alice.getNome());
-            Aluno vencedor = (zeca.getEntrada() > alice.getEntrada()) ? zeca : alice;
+            System.out.println(" Batalha: " + joaquim.getNome() + " vs " + joao.getNome());
+            Aluno vencedor = (joaquim.getEntrada() > joa.getEntrada()) ? joaquim : joao;
             System.out.println(" Vencedor: " + vencedor.getNome());
 
             dao.fechar();
