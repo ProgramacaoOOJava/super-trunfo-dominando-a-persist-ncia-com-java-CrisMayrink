@@ -1,0 +1,38 @@
+import jakarta.persistence.*;
+import java.util.*;
+
+public class MainApp {
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("SuperTrunfoPU");
+    private static EntityManager em = emf.createEntityManager();
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int opcao;
+
+        do {
+            System.out.println("\n🃏 MENU PRINCIPAL");
+            System.out.println("1 - Exibir cartas");
+            System.out.println("2 - Inserir carta");
+            System.out.println("3 - Buscar carta");
+            System.out.println("4 - Remover carta");
+            System.out.println("5 - Batalhar");
+            System.out.println("6 - Inserir dados exemplo");
+            System.out.println("7 - Mini-Torneio");
+            System.out.println("0 - Sair");
+            System.out.print("Opção: ");
+            opcao = Integer.parseInt(sc.nextLine());
+
+            switch (opcao) {
+                case 7:
+                    List<Aluno> baralho = em.createNamedQuery("Aluno.findAll", Aluno.class).getResultList();
+                    new TorneioManager(baralho).iniciarTorneio();
+                    break;
+                // demais opções...
+            }
+        } while (opcao != 0);
+
+        sc.close();
+        em.close();
+        emf.close();
+    }
+}
