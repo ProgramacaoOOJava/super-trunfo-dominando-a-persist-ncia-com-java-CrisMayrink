@@ -1,0 +1,7 @@
+public class CartaLendaria extends Aluno {
+    public CartaLendaria(String matricula, String nome) {
+        super(matricula);
+        setNome(nome);
+        setEntrada(2030); // ano especial
+    }
+}
