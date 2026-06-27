@@ -1,0 +1,76 @@
+public class Aluno {
+    private String matricula;
+    private String nome;
+    private int entrada;
+    
+    // Construtor padrão
+    public Aluno() {
+    }
+    
+    // Construtor com parâmetros
+    public Aluno(String matricula, String nome, int entrada) {
+       this.matricula = matricula;
+       this.nome = nome;
+       this.entrada =  entrada;
+    }
+    
+    // Getters e Setters
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public String getNome() {
+    return nome;
+    }
+
+    public int getEntrada() {
+        return entrada;
+    }  
+
+    public void setEntrada(int entrada) {
+        this.entrada = entrada;
+    }
+         
+    /**
+     * Calcula a força da carta baseada no ano de entrada
+     * Quanto mais recente, mais forte
+     * @return 
+     */
+    public int getForca() {
+        return getEntrada() ;
+    }
+        /**
+     * Determina a raridade da carta baseada na primeira letra da matrícula
+     * A-M = Comum, N-Z = Rara
+     */
+   //determina a raridade da primeira letra
+    public String getRaridade() {
+        char primeiraLetra = matricula.toUpperCase().charAt(0);
+        return (primeiraLetra >= 'A' && primeiraLetra <= 'M') ? "Comum" : "Rara";
+    }
+    /**
+     * Exibe a carta formatada no estilo Super Trunfo
+     */
+    public void exibirCarta() {
+        System.out.println(this.toString());        
+    }
+     /**
+     * Compara duas cartas em uma batalha
+     * A carta com ano de entrada mais recente vence
+     */
+    public boolean batalhar(Aluno oponente) {
+        return this.getForca() > oponente.getForca();
+    }
+    @Override
+    public String toString() {
+        System.out.println("*******************************\n");
+        System.out.println("Carta do Aluno");
+        System.out.println("Matrícula: " + matricula);
+        System.out.println("Nome     : " + nome);
+        System.out.println("Força    : " + getForca());
+        System.out.println("Raridade : " + getRaridade());
+        System.out.println("*******************************\n");return null;
+    }
+        
+}
